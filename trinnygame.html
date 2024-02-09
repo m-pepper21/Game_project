@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trinny the game</title>
+    <style>
+      #gameCanvas {
+        box-shadow: 10px 10px 20px black;
+      }
+      h1 {
+        text-align: center;
+        font-family: Comic "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif, sans-serif;
+        color: black;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+        height: 100vh;
+        background: linear-gradient(
+          rgb(202, 72, 178) 0%,
+          rgb(226, 175, 221) 100%
+        );
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>
+        <img src="../trinny.png" />
+        Trinny the game
+        <img src="../trinny.png" />
+      </h1>
+      <canvas id="gameCanvas"> </canvas>
+    </div>
+    <script src="src/game.js" type="module"></script>
+  </body>
+</html>
