@@ -12,7 +12,11 @@ const enemies = tileMap.getEnemies(velocity);
 function gameLoop() {
   tileMap.draw(ctx);
   Trinny.draw(ctx);
-  enemies.forEach((enemy) => enemy.draw(ctx));
+  enemies.forEach((enemy) => enemy.draw(ctx, pause(), Trinny));
+}
+
+function pause() {
+  return !Trinny.madeFirstMove;
 }
 
 tileMap.setCanvasSize(canvas);

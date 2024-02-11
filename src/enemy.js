@@ -15,12 +15,43 @@ export default class Enemy {
     );
 
     this.directionTimerDefault = this.#random(10, 50);
+    this.directionTimer = this.directionTimerDefault;
+
+    this.scaredAboutToExpireTimerDefault = 10;
+    this.scaredAboutToExpireTimer = this.this.scaredAboutToExpireTimerDefault;
   }
 
-  draw(ctx) {
-    this.#move();
-    this.#changeDirection();
+  draw(ctx, pause, Trinny) {
+    if (!pause) {
+      this.#move();
+      this.#changeDirection();
+    }
+    this.#setImage(ctx, Trinny);
+  }
+
+  #setImage(ctx, Trinny) {
+    if (Trinny.powerDotActive) {
+      this.#setImageWhenPowerDotIsActive(Trinny);
+    } else {
+      this.image = this.normalBroccoli;
+    }
     ctx.drawImage(this.image, this.x, this.y, this.tileSize, this.tileSize);
+  }
+
+  #setImageWhenPowerDotIsActive(Trinny) {
+    if (Trinny.powerDotIsAboutToExpire) {
+      this.scaredAboutToExpireTimer--;
+      if (this.scaredAboutToExpireTimer === 0) {
+        this.scaredAboutToExpireTimer = this.scaredAboutToExpireTimerDefault;
+        if (this.image === this.scaredBroccoli) {
+          this.image = this.scaredBroccoli2;
+        } else {
+          this.image = this.scaredBroccoli;
+        }
+      }
+    } else {
+      this.image = this.scaredBroccoli;
+    }
   }
 
   #changeDirection() {

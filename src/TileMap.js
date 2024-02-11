@@ -7,23 +7,30 @@ export default class TileMap {
     this.tileSize = tileSize;
     this.yellowDot = new Image();
     this.yellowDot.src = "../images/images/chicken.png";
+    this.pinkDot = new Image();
+    this.pinkDot.src = "../images/images/ball.png";
     this.wall = new Image();
     this.wall.src = "../images/images/wall.png";
     this.water = new Image();
     this.water.src = "../images/images/water.jpg";
+
+    this.powerDot = this.pinkDot;
+    this.powerDotAnimationTimerDefault = 60;
+    this.powerDotAnimationTimer = this.powerDotAnimationTimerDefault;
   }
   //1,2 - wall & water
   //0 - dots
   //4- Trinny
   //5 - empty space
   //6 - enemy
+  //7 - power dot
 
   map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 7, 0, 4, 0, 0, 0, 0, 0, 0, 0, 7, 1],
     [1, 0, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 1],
     [1, 0, 2, 6, 0, 0, 0, 0, 0, 0, 2, 0, 1],
-    [1, 0, 2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 1],
+    [1, 0, 2, 7, 2, 2, 2, 0, 2, 0, 2, 0, 1],
     [1, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 1],
     [1, 0, 2, 0, 2, 0, 0, 2, 2, 0, 2, 0, 1],
     [1, 0, 2, 0, 2, 0, 0, 2, 0, 0, 2, 0, 1],
@@ -42,6 +49,8 @@ export default class TileMap {
           this.#drawWater(ctx, column, row, this.tileSize);
         } else if (tile === 0) {
           this.#drawDot(ctx, column, row, this.tileSize);
+        } else if (tile == 7) {
+          this.#drawPowerDot(ctx, column, row, this.tileSize);
         } else {
           this.#drawBlank(ctx, column, row, this.tileSize);
         }
@@ -71,6 +80,25 @@ export default class TileMap {
       this.yellowDot,
       column * this.tileSize,
       row * this.tileSize,
+      size,
+      size
+    );
+  }
+
+  #drawPowerDot(ctx, column, row, size) {
+    this.powerDotAnimationTimer--;
+    if (this.powerDotAnimationTimer == 0) {
+      this.powerDotAnimationTimer = this.powerDotAnimationTimerDefault;
+      if (this.powerDot == this.pinkDot) {
+        this.powerDot = this.yellowDot;
+      } else {
+        this.powerDot = this.pinkDot;
+      }
+    }
+    ctx.drawImage(
+      this.powerDot,
+      column * this.tileSize,
+      row * size,
       size,
       size
     );
@@ -183,6 +211,18 @@ export default class TileMap {
     const column = x / this.tileSize;
     if (Number.isInteger(row) && Number.isInteger(column)) {
       if (this.map[row][column] === 0) {
+        this.map[row][column] = 5;
+        return true;
+      }
+    }
+    return false;
+  }
+  eatPowerDot(x, y) {
+    const row = y / this.tileSize;
+    const column = x / this.tileSize;
+    if (Number.isInteger(row) && Number.isInteger(column)) {
+      const tile = this.map[row][column];
+      if (tile === 7) {
         this.map[row][column] = 5;
         return true;
       }
