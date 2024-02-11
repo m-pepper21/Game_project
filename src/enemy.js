@@ -18,7 +18,7 @@ export default class Enemy {
     this.directionTimer = this.directionTimerDefault;
 
     this.scaredAboutToExpireTimerDefault = 10;
-    this.scaredAboutToExpireTimer = this.this.scaredAboutToExpireTimerDefault;
+    this.scaredAboutToExpireTimer = this.scaredAboutToExpireTimerDefault;
   }
 
   draw(ctx, pause, Trinny) {
