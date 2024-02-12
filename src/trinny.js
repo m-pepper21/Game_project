@@ -18,7 +18,7 @@ export default class Trinny {
 
     this.powerDotSound = new Audio("../sounds/power_dot.wav");
     this.powerDotActive = false;
-    this.powerDotAboutToExpire = false;
+    this.powerDotIsAboutToExpire = false;
     this.timers = [];
 
     this.madeFirstMove = false;
@@ -35,9 +35,11 @@ export default class Trinny {
     up: 3,
   };
 
-  draw(ctx) {
-    this.#move();
-    this.#animate();
+  draw(ctx, pause) {
+    if (pause) {
+      this.#move();
+      this.#animate();
+    }
     this.#eatChicken();
     this.#eatPowerDot();
 
@@ -191,21 +193,21 @@ export default class Trinny {
     if (this.tileMap.eatPowerDot(this.x, this.y)) {
       this.powerDotSound.play();
       this.powerDotActive = true;
-      this.powerDotAboutToExpire = false;
+      this.powerDotIsAboutToExpire = false;
       this.timers.forEach((timer) => clearTimeout(timer));
       this.timers = [];
 
       let powerDotTimer = setTimeout(() => {
         this.powerDotActive = false;
-        this.powerDotAboutToExpire = false;
+        this.powerDotIsAboutToExpire = false;
       }, 1000 * 6);
       this.timers.push(powerDotTimer);
 
       let powerDotAboutToExpireTimer = setTimeout(() => {
-        this.powerDotAboutToExpire = true;
+        this.powerDotIsAboutToExpire = true;
       }, 1000 * 3);
 
-      this.timers.push(powerDotAboutToExpireTimer);
+      this.timers.push(powerDotIsAboutToExpireTimer);
     }
   }
 }

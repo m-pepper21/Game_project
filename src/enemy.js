@@ -29,6 +29,20 @@ export default class Enemy {
     this.#setImage(ctx, Trinny);
   }
 
+  collideWith(Trinny) {
+    const size = this.tileSize / 2;
+    if (
+      this.x < Trinny.x + size &&
+      this.x + size > Trinny.x &&
+      this.y < Trinny.y + size &&
+      this.y + size > Trinny.y
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   #setImage(ctx, Trinny) {
     if (Trinny.powerDotActive) {
       this.#setImageWhenPowerDotIsActive(Trinny);
