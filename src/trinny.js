@@ -21,6 +21,8 @@ export default class Trinny {
     this.powerDotIsAboutToExpire = false;
     this.timers = [];
 
+    this.eatGhostSound = new Audio("../sounds/eat_ghost.wav");
+
     this.madeFirstMove = false;
 
     document.addEventListener("keydown", this.#keydown);
@@ -35,13 +37,14 @@ export default class Trinny {
     up: 3,
   };
 
-  draw(ctx, pause) {
-    if (pause) {
+  draw(ctx, pause, enemies) {
+    if (!pause) {
       this.#move();
       this.#animate();
     }
     this.#eatChicken();
     this.#eatPowerDot();
+    this.#eatGhost(enemies);
 
     const size = this.tileSize / 2;
 
@@ -208,6 +211,16 @@ export default class Trinny {
       }, 1000 * 3);
 
       this.timers.push(powerDotIsAboutToExpireTimer);
+    }
+  }
+
+  #eatGhost(enemies) {
+    if (this.powerDotActive) {
+      const collideEnemies = enemies.filter((enemy) => enemy.collideWith(this));
+      collideEnemies.forEach((enemy) => {
+        enemies.splice(enemies.indexOf(enemy), 1);
+        this.eatGhostSound.play();
+      });
     }
   }
 }

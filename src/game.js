@@ -16,7 +16,7 @@ const gameWinSound = new Audio("../sounds/gameWin.wav");
 
 function gameLoop() {
   tileMap.draw(ctx);
-  Trinny.draw(ctx, pause());
+  Trinny.draw(ctx, pause(), enemies);
   enemies.forEach((enemy) => enemy.draw(ctx, pause(), Trinny));
   checkGameOver();
 }
