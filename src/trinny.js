@@ -14,14 +14,14 @@ export default class Trinny {
     this.trinnyAnimationTimer = null;
 
     this.trinnyRotation = this.Rotation.right;
-    this.dogSound = new Audio("../sounds/dog_sound.wav");
+    this.dogSound = new Audio("./sounds/dog_sound.wav");
 
-    this.powerDotSound = new Audio("../sounds/power_dot.wav");
+    this.powerDotSound = new Audio("./sounds/power_dot.wav");
     this.powerDotActive = false;
     this.powerDotIsAboutToExpire = false;
     this.timers = [];
 
-    this.eatGhostSound = new Audio("../sounds/eat_ghost.wav");
+    this.eatGhostSound = new Audio("./sounds/eat_ghost.wav");
 
     this.madeFirstMove = false;
 
@@ -72,16 +72,16 @@ export default class Trinny {
 
   #loadTrinnyImages() {
     const trinnyImage1 = new Image();
-    trinnyImage1.src = "../images/images/trinny0.png";
+    trinnyImage1.src = "./images/images/trinny0.png";
 
     const trinnyImage2 = new Image();
-    trinnyImage2.src = "../images/images/trinny1.png";
+    trinnyImage2.src = "./images/images/trinny1.png";
 
     const trinnyImage3 = new Image();
-    trinnyImage3.src = "../images/images/trinny3.png";
+    trinnyImage3.src = "./images/images/trinny3.png";
 
     const trinnyImage4 = new Image();
-    trinnyImage4.src = "../images/images/trinny1.png";
+    trinnyImage4.src = "./images/images/trinny1.png";
 
     this.TrinnyImages = [
       trinnyImage1,
