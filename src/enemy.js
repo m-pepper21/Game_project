@@ -127,13 +127,13 @@ export default class Enemy {
 
   #loadImages() {
     this.normalBroccoli = new Image();
-    this.normalBroccoli.src = "../images/images/broccoli.jpg";
+    this.normalBroccoli.src = "./images/images/broccoli.jpg";
 
     this.scaredBroccoli = new Image();
-    this.scaredBroccoli.src = "../images/images/scared_broccoli.jpg";
+    this.scaredBroccoli.src = "./images/images/scared_broccoli.jpg";
 
     this.scaredBroccoli2 = new Image();
-    this.scaredBroccoli2.src = "../images/images/scared_broccoli2.jpg";
+    this.scaredBroccoli2.src = "./images/images/scared_broccoli2.jpg";
 
     this.image = this.normalBroccoli;
   }
